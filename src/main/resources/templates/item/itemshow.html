@@ -1,0 +1,37 @@
+	<div th:insert="com/_header"></div>
+
+	<main>
+		<article>
+			<div class="container">
+				<div class="row">
+					<div class="col span-12">
+						<div class="breadcrumb">
+							<ul>
+								<li><a th:href="@{/}">ホーム</a> > <a th:href="@{/item/itemlist}">商品一覧</a> > 商品詳細</li>
+							</ul>
+						</div>
+
+						<th:block th:if="message != null">
+							<h2 th:class="msg" th:text="${message}"></h2>
+						</th:block>
+
+						<h2 class="underline">商品詳細</h2>
+						<div>
+							<table th:object="${item}">
+								<tr><th>ID</th>	<td th:text="*{id}"></td> </tr>
+								<tr><th>商品名</th><td th:text="*{name}"></td></tr>
+								<tr><th>金額</th><td th:text="*{price}"></td></tr>
+								<tr><th>商品詳細</th><td th:text="*{description}"></td></tr>
+							 </table>
+						</div>
+
+						<a class="button" th:href="@{/item/{id}/edit(id=*{id})}">編集</a>
+						<a class="button" th:href="@{/item/itemform}">新規作成</a>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+	</main>
+
+	<div th:insert="com/_footer"></div>	

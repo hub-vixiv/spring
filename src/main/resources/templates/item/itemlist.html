@@ -1,0 +1,69 @@
+	<div th:insert="com/_header"></div>
+
+	<main>
+		<article>
+			<div class="container">
+				<div class="row">
+					<div class="col span-12">
+						<div class="breadcrumb">
+							<ul>
+								<li><a th:href="@{/}">ホーム</a> > 商品一覧</li>
+							</ul>
+						</div>
+
+						<th:block th:if="message != null">
+							<h2 th:class="msg" th:text="${message}"></h2>
+						</th:block>
+
+						<h2 class="underline">商品一覧</h2>
+						<div class="table">
+							<table class="st">
+								<tr>
+									<th>ID</th>
+									<th>商品名</th>
+									<th>金額</th>
+									<th>商品詳細</th>
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+								<tbody>
+									<tr th:each="item:${items}" th:object="${item}">
+										<td th:text="*{id}"></td>
+										<td th:text="*{name}"></td>
+										<td th:text="*{price}"></td>
+										<td th:text="*{description}"></td>
+										<td><a class="button" th:href="@{/item/{id}(id=*{id})}">詳細</a></td>
+										<td><a class="button" th:href="@{/item/{id}/edit(id=*{id})}">編集</a></td>
+										<td>
+										<form th:action="@{/item/{id}(id=*{id})}" th:method="delete">
+											<!--削除する前に、ダイアログで確認する js -->
+											<input class="btn" type="submit" onclick="return delConfirm()" value="削除" />
+										</form>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<a class="button" th:href="@{/item/itemform}">新規作成</a>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+	</main>
+	<script>
+		//削除前の確認
+		function delConfirm() {
+	        var result = confirm('削除してよろしいですか？');
+			if( result ) {
+				return true;
+			}
+			else {
+			   alert("キャンセルしました");
+			   return false;
+			}
+	    }
+	</script>
+
+	<div th:insert="com/_footer"></div>

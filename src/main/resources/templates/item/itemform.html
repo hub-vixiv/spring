@@ -1,0 +1,51 @@
+
+	<div th:insert="com/_header"></div>
+	<main>
+		<article>
+			<div class="container">
+				<div class="row">
+					<div class="col span-12">
+						<div class="breadcrumb">
+							<ul>
+								<li><a th:href="@{/}">ホーム</a> > 商品登録</li>
+							</ul>
+						</div>
+
+						<th:block th:if="message != null">
+							<h2 th:class="msg" th:text="${message}"></h2>
+						</th:block>
+
+						<h2 class="underline">商品登録</h2>
+						<form th:action="@{/item/itemform}" th:object="${itemForm}"
+							method="post">
+							<p>
+								<label for="name">商品名</label> <input class="full-width"
+									type="text" id="name" name="name" maxlength="20"
+									th:field="*{name}"> <span
+									th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+									th:class="msg"></span>
+							</p>
+							<p>
+								<label for="price">金額</label> <input class="full-width"
+									type="number" id="price" name="price" th:field="*{price}"><span
+									th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+									th:class="msg"></span>
+							</p>
+							<p>
+								<label for="description">商品詳細</label>
+								<textarea class="full-width" id="descritpion" name="description"
+									th:field="*{description}"></textarea>
+								<span th:if="${#fields.hasErrors('description')}"
+									th:errors="*{description}" th:class="msg"></span>
+							</p>
+							<p>
+								<input class="button" type="submit" value="登録">
+							</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</article>
+	</main>
+	
+	<div th:insert="com/_footer"></div>
